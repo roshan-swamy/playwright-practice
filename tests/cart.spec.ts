@@ -4,16 +4,21 @@ test('Going Solo on the Add to cart functionality', async({page}) => {
   await page.goto('https://www.saucedemo.com/');
 
   // Loging in - 
-  await page.locator('[data-test = "username"]').fill('standard_user');
-  await page.locator('[data-test = "password"]').fill('secret_sauce');
-  await page.locator('[data-test = "login-button"]').click();
+  // await page.locator('[data-test = "username"]').fill('standard_user');
+  // await page.getByPlaceholder('Username').fill('standard_user');
+  await page.getByRole('textbox', {name: 'Username'}).fill('standard_user');
+  // await page.locator('[data-test = "password"]').fill('secret_sauce');
+  await page.getByRole('textbox', {name: 'Password'}).fill('secret_sauce');
+  // await page.locator('[data-test = "login-button"]').click();
+  await page.getByRole('button', {name: 'Login'}).click();
 
   await expect(page).toHaveURL(/.*inventory.html/);
   await expect(page.locator('.app_logo')).toHaveText('Swag Labs');
+  await expect(page.getByRole('app-logo', {name: 'Swag Labs'}));
 
   // Now for the Add to cart test logic
   // Add to cart
-  await page.locator('[data-test = "add-to-cart-sauce-labs-bike-light"]').click();
+  // await page.locator('[data-test = "add-to-cart-sauce-labs-bike-light"]').click();
   await expect(page.locator('[data-test = "shopping-cart-badge"]')).toHaveText('1');
   await page.locator('[data-test = "add-to-cart-sauce-labs-bolt-t-shirt"]').click();
   await expect(page.locator('[data-test = "shopping-cart-badge"]')).toHaveText('2');
