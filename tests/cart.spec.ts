@@ -18,7 +18,7 @@ test('Going Solo on the Add to cart functionality', async({page}) => {
 
   // Now for the Add to cart test logic
   // Add to cart
-  // await page.locator('[data-test = "add-to-cart-sauce-labs-bike-light"]').click();
+  await page.locator('[data-test = "add-to-cart-sauce-labs-bike-light"]').click();
   await expect(page.locator('[data-test = "shopping-cart-badge"]')).toHaveText('1');
   await page.locator('[data-test = "add-to-cart-sauce-labs-bolt-t-shirt"]').click();
   await expect(page.locator('[data-test = "shopping-cart-badge"]')).toHaveText('2');
